@@ -1,0 +1,7 @@
+﻿  FileDirectory.cpp
+c:\users\jonathan\hw\ece426filesystem\ece414filesystem\filedirectory.cpp(142): warning C4554: '<<': check operator precedence for possible error; use parentheses to clarify precedence
+c:\users\jonathan\hw\ece426filesystem\ece414filesystem\filedirectory.cpp(144): warning C4244: '=': conversion from 'unsigned short' to 'unsigned char', possible loss of data
+c:\users\jonathan\hw\ece426filesystem\ece414filesystem\filedirectory.cpp(145): warning C4554: '<<': check operator precedence for possible error; use parentheses to clarify precedence
+c:\users\jonathan\hw\ece426filesystem\ece414filesystem\filedirectory.cpp(147): warning C4244: '=': conversion from 'unsigned short' to 'unsigned char', possible loss of data
+c:\users\jonathan\hw\ece426filesystem\ece414filesystem\filedirectory.cpp(148): warning C4244: '=': conversion from 'unsigned short' to 'unsigned char', possible loss of data
+  ece414FileSystem.vcxproj -> C:\Users\Jonathan\HW\ece426FileSystem\Debug\ece414FileSystem.exe
