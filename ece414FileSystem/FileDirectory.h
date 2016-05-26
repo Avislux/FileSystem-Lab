@@ -1,7 +1,7 @@
 class FileDirectory
 {
 private:
-	unsigned char	fileDirectory[4][32];	// a max of 4 file directories. Each has 32 bytes.
+	unsigned char	fileDirectory[4][32];	// a max of 4 file directories. Each has 32 bytes. char is a byte
 	unsigned short int	FAT16[256];	//256 clusters only
 	unsigned char data[1024];		//256 clusters * 4 bytes/cluster = 1;024 bytes.
 public:

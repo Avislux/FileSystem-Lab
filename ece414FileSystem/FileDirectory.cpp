@@ -89,27 +89,34 @@ bool FileDirectory::read(char   filename[], char filedata[]){
 }
 bool FileDirectory::write(char filename[], int numberBytes, char fileData[], int year, int month, int day, int hour, int minute, int second)
 {
-	unsigned short int clusterAddress, date, time;
-	int i;
+	unsigned short int firstClusterAddress,clusterAddress,nextClusterAddress, date, time;
+	int i, written;
+	written = 0;
 //purpose: to write numberBytes bytes of data from fileData[] array into the file with the specified file name
 // (0)	to look for the first unused entry(0 or 1) in the FAT - 16; and use it as the First Cluster Address.
 	for ( i = 2; i < 256; i++)
 	{	
-		if (FAT16[i] == 0)
+		if (FAT16[i] == 0) //address unused
 		{
 			break;
 		}
 	}
-	clusterAddress = FAT16[i];
+	clusterAddress = i;
+	firstClusterAddress = i;
 // (1)	to look for the next unused entry(0 or 1) in the FAT - 16; and use it as the Next Cluster Address; and write its value into the FAT - 16.
 // (2)	Repeat Step 2 until all clusters are found and the FAT - 16 is updated.
 	for (i = i+1; i < 256; i++)
 	{
-		if (FAT16[i] == 0)
+		if (FAT16[i] == 0 && written <=numberBytes)
 		{
-			break;
+			written += 1;
+			nextClusterAddress = i;
+			FAT16[clusterAddress] = nextClusterAddress; //store next cluster into fat at current cluster
+			clusterAddress = nextClusterAddress;
+			
 		}
 	}
+	
 //(3)	to write / update the file name, extension, date, time, file length and first cluster address into the first unused entry in the File Directory;
 	//assume file i is the file to be written into the Directory.
 	for (int j = 0; j < 8; j++) { fileDirectory[i][j] = filename[j]; }
@@ -138,8 +145,9 @@ bool FileDirectory::printClusters(char filename[]) {
 	if (fileFound == false) {
 		return false;
 	}
-	for (int j = 0; j < 8; j++) { //first eight bytes
-		cout << FileDirectory::fileDirectory[location][j];
+	for (int j = 0; j < 32; j++) { //print all data
+		cout << FileDirectory::fileDirectory[location][j] << " ";
+		if (j % 8 == 0) { cout << endl; }
 	}
 }
 /*
@@ -155,7 +163,14 @@ bool FileDirectory::printClusters(char filename[]) {
 	(2)	use the first cluster address to get all cluster addresses from the FAT - 16;
 	(3)	use cluster address to read the data of the file.Use the file length to print these data in hexadecimal format.
 */
-void FileDirectory::printDirectory() {}
+void FileDirectory::printDirectory() {
+	int k;
+	for (k = 0; k < 4; k++) {
+		for (int j = 0; j < 8; j++) { //print file name
+			cout << FileDirectory::fileDirectory[k][j] ;
+			
+	}
+}
 /* prints all the  files of the directory.
 (1)	use the file name to get the file information from the File Directory; including the first cluster address;
 (2)	use the first cluster address to get all cluster addresses from the FAT - 16;
