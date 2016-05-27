@@ -11,16 +11,19 @@ int main()
 	cpp.create("file1", 40);
 	char file1[8], file1data[20];
 	for (int i = 0; i < 8; i++) {
-		file1[i] = 0x11;
+		file1[i] = 0x66;
 	}
 	for (int i = 0; i < 20; i++) {
 		file1[i] = 0x22;
 	}
 	cpp.write(file1, 20, file1data, 2016, 12, 12, 12, 12, 12);
-	//cpp.printDirectory();
+	
 	cpp.printClusters(file1);
 	std::cout << "\n";
 	cpp.printData(file1);
+	std::cout << "\n";
+	cpp.read(file1, file1data);
+	//cpp.printDirectory();
 	//	2.	create and write a file; file2;  of 200 bytes;
 	cpp.create("file2", 200);
 	//	3.	create and write a file; file3;  of 300 bytes;
