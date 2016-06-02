@@ -20,9 +20,9 @@ int main()
 	
 	cpp.printClusters(file1);
 	std::cout << "\n";
-	cpp.printData(file1);
+	//cpp.printData(file1);
 	std::cout << "\n";
-	cpp.read(file1, file1data);
+	//cpp.read(file1, file1data);
 	//cpp.printDirectory();
 	//	2.	create and write a file; file2;  of 200 bytes;
 	cpp.create("file2", 200);

@@ -26,13 +26,14 @@ bool FileDirectory::create(char   filename[], int numberBytes){
 		if (FileDirectory::FAT16[i] == 0) unused += 1;
 	}
 	if (unused >= numberBytes) {
+		cout << "File created" << endl;
 		output = true;
 	}
 	else { 
 		cout << "Cannot create file " << endl;
 		output = false;
 	}
-	cout << "File created" << endl;
+	//
 	return output;//Return false if not true.
 }
 bool FileDirectory::deleteFile(char   filename[]){
